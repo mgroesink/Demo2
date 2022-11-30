@@ -29,20 +29,30 @@ namespace Demo2
         {
             get { return Math.PI * 2 * _radius; }
         }
+
+        public double Radius
+        {
+            get { return _radius; }
+        }
         #endregion
 
         #region Constructors
         public Circle(string input)
         {
             input = input.ToLower();
-            if (input[0] != 'd' && input[0] != 's')
+            if(input.Trim().Length == 0)
             {
-                throw new ArgumentException("Moet met een d (diameter) of s (straal) beginnen");
+                throw new ArgumentException("Je moet een grootte opgeven voor de cirkel");
             }
             if (input[1] != ':')
             {
                 throw new ArgumentException("Er ontbrfeekt een dubbele punt");
             }
+            if (input[0] != 'd' && input[0] != 's')
+            {
+                throw new ArgumentException("Moet met een d (diameter) of s (straal) beginnen");
+            }
+
             if (int.Parse(input.Split(':')[1]) < 1)
             {
                 throw new ArgumentException("Alleen positieve getallen zijn toegestaan");
@@ -75,10 +85,18 @@ namespace Demo2
         }
         #endregion
 
+        #region Methods
+        /// <summary>
+        /// Show circle information.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
         public override string ToString()
         {
             return $"De cirkel is {Color} en heeft een straal van {_radius} en een diameter van {_radius * 2}";
-        }
+        } 
+        #endregion
 
     }
 }
